@@ -6,6 +6,20 @@ defmodule Assertion do
     end
   end
 
+  # NOTE
+  # __using__ is part of Elixir's public API for extending modules.
+  defmacro __using__(_options) do
+    quote do
+      import unquote(__MODULE__)
+
+      # After importing the current module, any functions
+      # we define will be available on the module.
+      def run do
+        IO.puts "Running the tests..."
+      end
+    end
+  end
+
 end
 
 defmodule Assertion.Test do
